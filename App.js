@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import Contacts from './contacts'
 import {Constants} from 'expo'
 import Row from './components/row'
@@ -8,11 +8,16 @@ export default class App extends React.Component {
   
   constructor() {
     super()
+    this.state = {
+      showContact: true,
+    }
     
   }
 
   toggleContact = () => {
-
+    this.setState(prevState => ({
+      showContact: !this.state.showContact,
+    }));
   }
 
   renderRows = () => {
@@ -26,7 +31,9 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Button title="Toggle" onPress={this.toggleContact}/>
+        {this.state.showContact && (<ScrollView>
         {this.renderRows()}
+        </ScrollView>)}
       </View>
     );
   }
