@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, SectionList } from 'react-native';
 import Contacts from './contacts'
 import {Constants} from 'expo'
 import Row from './components/row'
+import ContactList from './container/contactList'
 
 export default class App extends React.Component {
   
@@ -39,10 +40,8 @@ export default class App extends React.Component {
         <Button title="Toggle" onPress={this.toggleContact}/>
         <Button title="Sort" onPress={this.sortContact}/> 
         {this.state.showContact && (
-          <FlatList
-            renderItem={(obj) => <Row {...(obj.item)} />}
-            data={this.state.contacts} />
-        )}
+          <ContactList contacts={this.state.contacts}/>
+       )}
       </View>
     );
   }
@@ -51,6 +50,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
+    flex: 1,
   },
   eachRow: {
     padding: 2,
